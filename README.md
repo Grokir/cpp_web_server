@@ -1,2 +1,7 @@
-serv - executable file for Linux.
-![Снимок экрана от 2024-09-28 11-17-31](https://github.com/user-attachments/assets/69f14cc3-fd85-4e14-9ee0-e518cf0ad5b4)
+serv - exec файл под Linux.
+
+Пример того, как это выглядит
+
+![1](https://github.com/Grokir/cpp_web_server/blob/main/screenshots/1.png)
+
+![2](https://github.com/Grokir/cpp_web_server/blob/main/screenshots/2.png)
