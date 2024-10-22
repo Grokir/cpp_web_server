@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/css/style_login.css">
+        <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+        <title>Messenger</title>
+        <script>
+            function registration(){
+                var jsondata = {
+                    "login": document.getElementById("nicknameSignUp").value,
+                    "password": document.getElementById("passwordSignUp").value,
+                    "name": document.getElementById("name").value,
+                    "surname": document.getElementById("surname").value
+                };
+
+                console.log(jsondata);
+
+                let promise = fetch("http://localhost:8080/user/create", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(jsondata)
+                })
+                    .then(response => { return response.json()})
+
+                promise.then(
+                    function (response) {
+                        // console.log(response.data);
+                        console.log(response.status);
+
+                        if(response.status === "OK") {
+                            window.location.href = "http://localhost:8080/" + response.userId + "/chat?#";
+                            alert("Поздравляем! Вы зарегистрированы!");
+                        }
+                        else {
+                            alert("Пользователь с таким логином уже существует.");
+                        }
+                    })
+
+                alert("Подождите, пожалуйста...");
+            }
+
+            function login(){
+                var jsondata = {
+                    "login": document.getElementById("nicknameSignIn").value,
+                    "password": document.getElementById("passwordSignIn").value
+                };
+
+                let promise = fetch("http://localhost:8080/user/login", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(jsondata)
+                }).then(response => {
+                    return response.json()
+                })
+
+                promise.then(
+                        function (response) {
+                            if(response.status === "OK") {
+                                alert("Добро пожаловать!");
+                                window.location.href = "http://localhost:8080/" + response.userId + "/chat?#";
+                            }
+                            // var jsonresp = JSON.parse(response.status);
+                            if(response.status === "wrong password") {
+                                alert("Неверный пароль!");
+                            }
+                            if(response.status === "user not exist or wrong login"){
+                                alert("Пользователь не найден: зарегестрируйтесь или проверьте логин!");
+                            }
+
+                        }
+                );
+
+                alert("Подождите, пожалуйста...");
+            }
+
+        </script>
+
+
+    </head>
+    <body>
+        
+        <div class="conteiner" id="conteiner">
+            <div class="form-conteiner sign-up">
+                <form id="signupform">
+                    <h1>Регистрация</h1>
+                    <input type="text" id="name"
+                    placeholder="Name">
+                    <input type="text" id="surname"
+                    placeholder="Surename">
+                    <input type="text" id="nicknameSignUp"
+                    placeholder="Nickname">
+                    <input type="password" id="passwordSignUp"
+                    placeholder="Password">
+                    <button type="submit" id="regbutton" onclick="registration();">Регистрация</button>
+
+                </form>
+            </div>
+            <div class="form-conteiner sign-in">
+                <form id="signinform">
+                   <h1>Вход</h1>
+                   <input type="text" id="nicknameSignIn"
+                   placeholder="Nickname">
+                   <input type="password" id="passwordSignIn"
+                   placeholder="Password">
+                   <button type="submit" id="logbutton" onclick="login();">Войти</button>
+                </form>
+            </div>
+            <div class="toggle-conteiner">
+                <div class="toggle">
+                    <div class="toggle-panel toggle-left">
+                        <h1>С возвращением!</h1>
+                        <p>Введите свои личные данные, чтобы использовать Messenger</p>
+                        <button class="hidden" id="login">Войти</button>
+                    </div>
+                    <div class="toggle-panel toggle-right">
+                        <h1>Добро пожаловать!</h1>
+                        <p>Зарегистрируйтесь, указав свои личные данные, чтобы использовать Messenger</p>
+                        <button class="hidden" id="register">Регистрация</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="/js/script_login.js"></script>
+    </body>
+</html>
