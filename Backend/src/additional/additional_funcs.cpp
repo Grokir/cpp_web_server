@@ -1,4 +1,5 @@
-#include "additional_funcs.h"
+#include "additional/additional_funcs.h"
+#include <utility>
 
 std::pair<std::string, std::string> GetMethodAndURL(const std::string& request){
   std::string method, url, HEADERS;
@@ -10,7 +11,7 @@ std::pair<std::string, std::string> GetMethodAndURL(const std::string& request){
   posdelim = HEADERS.find(" ");
   url = HEADERS.substr(0, posdelim);
   
-  return std::pair(method, url);
+  return { method, url };
 }
 
 std::string ReadFile(const std::string& path){
