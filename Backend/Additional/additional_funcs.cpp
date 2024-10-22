@@ -1,12 +1,14 @@
 #include "additional_funcs.h"
 
 std::pair<std::string, std::string> GetMethodAndURL(const std::string& request){
-  std::string method, url;
-  std::size_t posdelim, posdelim2;
-  request.find(' ', posdelim);
-  method = request.substr(0, posdelim);
-  request.find(" H", posdelim2);
-  url = request.substr(posdelim+1, posdelim2);
+  std::string method, url, HEADERS;
+  HEADERS = request.substr(0, 256);
+  std::size_t posdelim;
+  posdelim = HEADERS.find(" ");
+  method = HEADERS.substr(0, posdelim);
+  HEADERS.erase(0, posdelim + 1);
+  posdelim = HEADERS.find(" ");
+  url = HEADERS.substr(0, posdelim);
   
   return std::pair(method, url);
 }
