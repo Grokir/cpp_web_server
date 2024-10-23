@@ -1,0 +1,19 @@
+0) если инициализация проходит в первый раз необходимо каким-то чудом выполнить скрипт 
+./creates/for_windows.sql
+это можно сделать через инструмент PGAdmin PSQL tool
+1) Выполните в PSQL tool следующую серию команд
+	1.1) \q - для выхода с сервера
+	1.2) выполнить команду: psql -h localhost -U postgres -d postgres -f "&Путь до папки&\cpp_web_server\database\Postgres\scripts\creates\createDB.sql"
+должен быть следующий результат
+CREATE DATABASE
+GRANT
+GRANT
+SET
+
+2) Обновить данные сервера
+3) Перейти в запросник(Query tool) и убедиться что подключены к нашей БД
+4) Выполнить скрипты в следующем порядке:
+	4.1) ./creates/create_table_script.sql
+	4.2) ./inserts/insert_standart_data.sql
+	4.3) при необходимости ./inserts/insert_test_data.sql
+Готово
