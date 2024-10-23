@@ -17,3 +17,4 @@ GRANT TEMPORARY, CONNECT ON DATABASE book_crossing TO PUBLIC;
 
 GRANT ALL ON DATABASE book_crossing TO postgres;
 
+SET client_encoding TO 'UTF8';

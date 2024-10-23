@@ -203,11 +203,7 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS main.book
     OWNER to postgres;
 
-REVOKE ALL ON TABLE main.book FROM "user";
-
 GRANT ALL ON TABLE main.book TO postgres;
-
-GRANT DELETE, UPDATE, INSERT, SELECT ON TABLE main.book TO "user";
 
 COMMENT ON COLUMN main.book.id
     IS 'Идентификатор книги';
